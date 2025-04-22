@@ -179,4 +179,35 @@ var WildRydes = window.WildRydes || {};
             }
         );
     }
+
+    function showLoggedIn(user) {
+      $('#loginMessage').text(`Howdy, ${user.getUsername()}! You’re all set.`);
+      $('#authLinks').hide();
+      $('#authStatus').show();
+    }
+    
+    function showLoggedOut() {
+      $('#authStatus').hide();
+      $('#authLinks').show();
+    }
+    
+    $(function() {
+      var cognitoUser = userPool.getCurrentUser();
+      if (!cognitoUser) {
+        return showLoggedOut();
+      }
+      cognitoUser.getSession(function(err, session) {
+        if (err || !session.isValid()) {
+          return showLoggedOut();
+        }
+        showLoggedIn(cognitoUser);
+      });
+    });
+    
+    $('#logoutButton').on('click', function() {
+      var cognitoUser = userPool.getCurrentUser();
+      if (cognitoUser) cognitoUser.signOut();
+      showLoggedOut();
+    });
+
 }(jQuery));

@@ -25,8 +25,16 @@
       </ul>
     </nav>
     <button type="button" class="btn-menu"><span>Menu</span></button>
-    <a class="home-button register" href="/register.html">Register, Giddy Up!</a>
-    <a class="home-button signin" href="/signin.html">Sign In, Hiyya!</a>
+
+    <div id="authLinks">
+      <a class="home-button register" href="/register.html">Register, Giddy Up!</a>
+      <a class="home-button signin"  href="/signin.html">Sign In, Hiyya!</a>
+    </div>
+
+    <div id="authStatus" style="display:none;">
+      <span class="home-button" id="loginMessage">Yee‑haw! You’re logged in.</span>
+      <button class="home-button logout" id="logoutButton">Log Out</button>
+    </div>
   </header>
 
   <section class="home-about">
